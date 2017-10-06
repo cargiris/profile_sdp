@@ -8,7 +8,7 @@ class profile::windows {
 
   user { 'costa':
     ensure  => present,
-    gid     => '111', 
+    groups  => ["Administrators","sdpusers"], 
     require => Group['sdpusers'],
   }
 }
