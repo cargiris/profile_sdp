@@ -14,8 +14,14 @@ class profile::windows {
     require  => Group['sdpusers'],
   }
   
+  windows_utensils::policy_set_privilege { 'costa':
+   identity    => "windows\costa",
+   privilege   => "SeServiceLogonRight",
+   description => "Costa user allow SeServiceLogonRight"
+  }
+
   windows_services::credentials{'puppet':
-	  username    => "windows\\costa",
+	  username    => "windows\costa",
 	  password    => $costa_passwd,
 	  servicename => "puppet",
 	  delayed     => false,
