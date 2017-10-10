@@ -19,4 +19,11 @@ class profile::windows {
    privilege   => "SeServiceLogonRight",
    description => "Costa user allow SeServiceLogonRight"
   }
+
+  file { 'C:\\Users\\costa\\Desktop\\Personal': 
+    ensure => directory,
+    owner  => 'costa',
+    group  => 'sdpusers',
+  }
+
 }
