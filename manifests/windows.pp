@@ -19,11 +19,4 @@ class profile::windows {
    privilege   => "SeServiceLogonRight",
    description => "Costa user allow SeServiceLogonRight"
   }
-
-  windows_services::credentials{'puppet':
-	  username    => "windows\costa",
-	  password    => $costa_passwd,
-	  servicename => "puppet",
-	  delayed     => false,
-	}
 }
