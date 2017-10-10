@@ -26,4 +26,11 @@ class profile::windows {
     group  => 'sdpusers',
   }
 
+  acl { 'C:\\Users\\costa\\Desktop\\Personal':
+    permissions => [
+      { identity => 'costa', rights => ['full'] },
+      { identity => 'sdpusers', rights => ['read'] }
+    ],
+  }
+
 }
