@@ -33,4 +33,14 @@ class profile::windows {
     ],
   }
 
+  registry_value { 'HKLM\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\IEHarden':
+    ensure => present,
+    type   => dword,
+    data   => 1,
+  }
+  registry_value { 'HKLM\Software\Policies\Microsoft\Windows NT\Reliability\ShutdownReasonUI':
+    ensure => present,
+    type   => dword,
+    data   => 1,
+  }
 }
