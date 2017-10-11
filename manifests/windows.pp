@@ -40,7 +40,6 @@ class profile::windows {
   }
   registry::value { 'ShutdownReasonUI':
     key    => 'HKLM\\Software\\Policies\\Microsoft\\Windows NT\\Reliability',
-    ensure => present,
     type   => dword,
     data   => 1,
   }
