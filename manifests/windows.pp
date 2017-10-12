@@ -43,4 +43,9 @@ class profile::windows {
     type   => dword,
     data   => 1,
   }
+
+  dism { 'IIS-WebServer':
+    ensure    => present,
+    norestart => true,
+  }
 }
