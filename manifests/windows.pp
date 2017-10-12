@@ -83,7 +83,7 @@ class profile::windows {
 
   iis_application_pool { 'basic_site_app_pool':
     ensure                  => 'present',
-    state                   => 'started'
+    state                   => 'started',
     managed_pipeline_mode   => 'Integrated',
     managed_runtime_version => 'v4.0',
   }
