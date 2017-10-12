@@ -43,7 +43,7 @@ class profile::windows {
     type   => dword,
     data   => 1,
   }
-
+# IIS Resources
   dism { 'IIS-WebServer':
     ensure    => present,
     norestart => true,
@@ -55,4 +55,67 @@ class profile::windows {
     norestart => true,
     all       =>  true,
   }
+  # Create Directories
+
+  file { 'c:\\inetpub\\basic':
+    ensure => 'directory'
+  }
+
+  file { 'c:\\inetpub\\basic_vdir':
+    ensure => 'directory'
+  }
+
+  # Set Permissions
+
+  acl { 'c:\\inetpub\\basic':
+    permissions => [
+      {'identity' => 'IISCompleteGroup', 'rights' => ['read', 'execute']},
+    ],
+  }
+
+  acl { 'c:\\inetpub\\basic_vdir':
+    permissions => [
+      {'identity' => 'IISCompleteGroup', 'rights' => ['read', 'execute']},
+    ],
+  }
+
+  # Configure IIS
+
+  iis_application_pool { 'basic_site_app_pool':
+    ensure                  => 'present',
+    state                   => 'started'
+    managed_pipeline_mode   => 'Integrated',
+    managed_runtime_version => 'v4.0',
+  }
+
+  #Application Pool No Managed Code .Net CLR Version set up
+  iis_application_pool {'test_app_pool':
+      ensure                    => 'present',
+      enable32_bit_app_on_win64 => true,
+      managed_runtime_version   => '""',
+      managed_pipeline_mode     => 'Classic',
+      start_mode                => 'AlwaysRunning'
+    }
+
+  iis_site { 'basic':
+    ensure           => 'started',
+    physicalpath     => 'c:\\inetpub\\basic',
+    applicationpool  => 'basic_site_app_pool',
+    enabledprotocols => 'https',
+    bindings         => [
+      {
+        'bindinginformation'   => '*:80:',
+        'protocol'             => 'http',
+      },
+    ],
+    require => File['c:\\inetpub\\basic'],
+  }
+
+  iis_virtual_directory { 'vdir':
+    ensure       => 'present',
+    sitename     => 'basic',
+    physicalpath => 'c:\\inetpub\\basic_vdir',
+    require      => File['c:\\inetpub\\basic_vdir'],
+  }
+
 }
