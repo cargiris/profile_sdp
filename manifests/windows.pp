@@ -69,13 +69,13 @@ class profile::windows {
 
   acl { 'c:\\inetpub\\basic':
     permissions => [
-      {'identity' => 'IISCompleteGroup', 'rights' => ['read', 'execute']},
+      {'identity' => 'sdpusers', 'rights' => ['read', 'execute']},
     ],
   }
 
   acl { 'c:\\inetpub\\basic_vdir':
     permissions => [
-      {'identity' => 'IISCompleteGroup', 'rights' => ['read', 'execute']},
+      {'identity' => 'sdpusers', 'rights' => ['read', 'execute']},
     ],
   }
 
