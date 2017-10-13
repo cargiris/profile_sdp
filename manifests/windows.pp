@@ -88,6 +88,12 @@ class profile::windows {
     managed_runtime_version => 'v4.0',
   }
 
+  $iis_features = ['Web-WebServer','Web-Scripting-Tools']
+
+  iis_feature { $iis_features:
+    ensure => 'present',
+  } ->
+  
   iis_site { 'basic':
     ensure           => 'started',
     physicalpath     => 'c:\\inetpub\\basic',
