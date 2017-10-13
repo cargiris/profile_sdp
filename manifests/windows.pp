@@ -123,7 +123,7 @@ class profile::windows {
  } ->
  
  staging::file { '7-Zip-16.04':
-  source => http://www.7-zip.org/a/7z1604-x64.exe
+  source => 'http://www.7-zip.org/a/7z1604-x64.exe',
  } ->
  
  package { '7-Zip 16.04':
