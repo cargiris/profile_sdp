@@ -133,7 +133,6 @@ class profile::windows {
  package { '7-Zip 16.04':
    source          => 'C:\\Temp\\profile\\7-Zip-16.04.exe',
    ensure          => installed,
-   install_options => ['/S'], 
  }
 
 }
