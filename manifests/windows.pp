@@ -45,7 +45,7 @@ class profile::windows {
   }
 # IIS Resources
   dism { 'IIS-WebServer':
-    ensure    => absent,
+    ensure    => present,
     norestart => true,
     all       => true,
     require   => Dism['NetFx3'],
