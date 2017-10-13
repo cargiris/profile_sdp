@@ -124,15 +124,17 @@ class profile::windows {
    path  => 'C:\\Temp',
    owner => 'Administrator',
    group => 'Administrators',
+   mode  => '0775',
  } ->
  
  staging::file { '7-Zip-16.04.exe':
   source => 'http://www.7-zip.org/a/7z1604-x64.exe',
  } ->
  
- package { '7-Zip 16.04':
+ package { '7-Zip 16.04 (x64)':
    source          => 'C:\\Temp\\profile\\7-Zip-16.04.exe',
    ensure          => installed,
+   install_options => ['/S'],
  }
 
 }
