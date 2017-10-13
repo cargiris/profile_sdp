@@ -116,26 +116,13 @@ class profile::windows {
     require      => File['c:\\inetpub\\basic_vdir'],
   }
 
-# 7zip installation
- file { 'C:\\Temp':
-   ensure => directory,
- } ->
+# 7zip installation using Chocolatey
 
- class { 'staging':
-   path  => 'C:\\Temp',
-   owner => 'Administrator',
-   group => 'Administrators',
-   mode  => '0775',
- } ->
- 
- staging::file { '7-Zip-16.04.exe':
-  source => 'http://www.7-zip.org/a/7z1604-x64.exe',
- } ->
- 
- package { '7-Zip 16.04 (x64)':
-   source          => 'C:\\Temp\\profile\\7-Zip-16.04.exe',
-   ensure          => installed,
-   install_options => ['/S','/D=C:\\Program Files\\7-Zip'],
- }
+  include chocolatey
+
+  package { '7zip':
+    ensure   => latest,
+    provider => 'chocolatey',  
+  }
 
 }
