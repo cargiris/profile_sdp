@@ -93,7 +93,7 @@ class profile::windows {
   iis_feature { $iis_features:
     ensure => 'present',
   } ->
-  
+
   iis_site { 'basic':
     ensure           => 'started',
     physicalpath     => 'c:\\inetpub\\basic',
@@ -114,5 +114,22 @@ class profile::windows {
     physicalpath => 'c:\\inetpub\\basic_vdir',
     require      => File['c:\\inetpub\\basic_vdir'],
   }
+
+# 7zip installation
+ class { 'staging':
+   path  => 'C:\\Windows\\Temp',
+   owner => 'Administrator',
+   group => 'Administrators',
+ } ->
+ 
+ staging::file { '7-Zip-16.04':
+  source => http://www.7-zip.org/a/7z1604-x64.exe
+ } ->
+ 
+ package { '7-Zip 16.04':
+   source          => 'C:\\Windows\\Temp\\7z1604-x64.exe',
+   ensure          => installed,
+   install_options => ['/VERYSILENT'], 
+ }
 
 }
