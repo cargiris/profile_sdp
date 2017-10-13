@@ -116,13 +116,17 @@ class profile::windows {
   }
 
 # 7zip installation
+ file { 'C:\\Temp':
+   ensure => directory,
+ } ->
+
  class { 'staging':
-   path  => 'C:\\Windows\\Temp',
+   path  => 'C:\\Temp',
    owner => 'Administrator',
    group => 'Administrators',
  } ->
  
- staging::file { '7-Zip-16.04':
+ staging::file { '7-Zip-16.04.exe':
   source => 'http://www.7-zip.org/a/7z1604-x64.exe',
  } ->
  
