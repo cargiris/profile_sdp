@@ -123,6 +123,9 @@ class profile::windows {
   package { '7zip.install':
     ensure   => latest,
     provider => 'chocolatey',
-  }
+  } 
+  reboot { 'after':
+    subscribe => Package['7zip.install'],
+  } 
 
 }
