@@ -122,7 +122,8 @@ class profile::windows {
 
   package { '7zip':
     ensure   => latest,
-    provider => 'chocolatey',  
+    provider => 'chocolatey',
+    install_options => ['/S', '/D=C:\\Program Files\\7-Zip'],
   }
 
 }
