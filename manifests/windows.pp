@@ -48,6 +48,7 @@ class profile::windows {
     ensure    => present,
     norestart => true,
     all       => true,
+    source    => 'C:\\Windows\\WinSxS',
     require   => Dism['NetFx3'],
   }
   dism { 'NetFx3':
